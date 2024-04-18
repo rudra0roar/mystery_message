@@ -50,7 +50,13 @@ export async function POST(request:Request) {
             message : user[0].messages
         }, { status : 200})
     } catch (error) {
-        
+        console.log("Failed to get Message ");
+        return Response.json(
+            {
+                success: false,
+                message: "Failed to get Message  "
+            }, { status: 500 }
+        )
     }
 
 }
