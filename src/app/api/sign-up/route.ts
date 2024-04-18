@@ -2,27 +2,28 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import bcrypt from "bcryptjs"
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
-import Error from "next/error";
-import { ApiResponse } from "@/types/ApiResponse";
+import { NextResponse } from "next/server";
 
 
-export async function POST(request : Request) : Promise<ApiResponse>{
+export async function POST(request : Request){
+    console.log("sign in mein aaya kya");
     await dbConnect();
 
     try {
         const {username , email , password} = await request.json()
         const existingUserVerifiedByUsername = await UserModel.findOne({username , isVerified : true})
         if(existingUserVerifiedByUsername){
-            return ({success : false , message : "Username Already Taken"})
+            return NextResponse.json({success : false , message : "User Already Exist"},{status : 400});
         }
-        
-        const existingUserByEmail = await UserModel.findOne(email)
+        console.log(existingUserVerifiedByUsername);
+        const existingUserByEmail = await UserModel.findOne({email})
         const verifyCode = Math.floor(100000 + Math.random()*900000).toString()
         if(existingUserByEmail){
             if(existingUserByEmail.isVerified){
-                return {success : false , message : "User Already Verifed"}
+                return NextResponse.json({success : false , message : "User Already Verifed"},{status : 400});
             }
             else{
+                console.log("Idhar aay kya");
                 const hasedPassword = await bcrypt.hash(password , 10)
                 existingUserByEmail.password = hasedPassword
                 existingUserByEmail.verifyCode = verifyCode
@@ -31,7 +32,8 @@ export async function POST(request : Request) : Promise<ApiResponse>{
             }
         }
         else{
-            const hasedPassword = bcrypt.hash(password , 10)
+            const hasedPassword = await bcrypt.hash(password , 10)
+            console.log("Hashed Password" , hasedPassword);
             const expiryDate = new Date()
             expiryDate.setHours(expiryDate.getHours() + 1)
             const newUser = new UserModel({
@@ -43,6 +45,8 @@ export async function POST(request : Request) : Promise<ApiResponse>{
                 isAcceptingMessage : true,
                 messages : []
             })
+            console.log(newUser);
+            console.log("Yha tak to mushkil hii ponche honge");
 
             await newUser.save()
 
@@ -50,15 +54,16 @@ export async function POST(request : Request) : Promise<ApiResponse>{
 
         // send Verification Email
         const emailResponse = await sendVerificationEmail(email , username , verifyCode)
-
+        console.log("email response k baad aaya kya" , emailResponse);
         if(!emailResponse.success){
-            return {success : false , message : emailResponse.message}
+            console.log("Idhar to aaya hoga");
+            return NextResponse.json({success : false , message : emailResponse.message});
         }
 
-        return {success : true , message : "User Registered Successfully. Please Verify Your Email."}
+        return NextResponse.json({success : true , message : "User Registered Successfully. Please Verify Your Email."},{status : 200});
         
     } catch (error) {
         console.error("Error Registring User" , error);
-        return {success : false , message : "Error Registering User"}
+        return NextResponse.json({success : false , message : "Error in Registering User"},{status : 400});
     }
 }
