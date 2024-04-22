@@ -18,7 +18,6 @@ export async function GET(request : Request){
         }
         // validate with zod
         const result = UsernameQuerySchema.safeParse(queryParam)
-        console.log(result);
         if(!result.success){
             const usernameErrors = result.error.format().username?._errors || []
             return Response.json({
@@ -31,6 +30,8 @@ export async function GET(request : Request){
         }
 
         const {username} = result.data
+
+        console.log("YE waali username ki value hai na sir",username);
 
         const existingVerifiedUser = await UserModel.findOne({username , isVerified : true})
 
@@ -48,7 +49,7 @@ export async function GET(request : Request){
             message : "username is available"
         },
     {
-        status : 400
+        status : 200
     })
     } catch (error) {
         console.error("Error Checking Username" , error);
