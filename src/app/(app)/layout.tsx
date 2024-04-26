@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 
+import { Providers } from "@/redux/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,12 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={inter.className}>
-          {children}
-          <Toaster/>
-        </body>
-      </AuthProvider>
+      <Providers>
+        <AuthProvider>
+          <body className={inter.className}>
+            {children}
+            <Toaster />
+          </body>
+        </AuthProvider>
+      </Providers>
     </html>
   );
 }

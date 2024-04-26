@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { useAppSelector } from '@/redux/hooks'
 
 export default function page() {
 
@@ -33,6 +34,8 @@ export default function page() {
   const { toast } = useToast()
   const router = useRouter()
   console.log("Ye apna Username hai", username , usernameMessage);
+  const colorOption = useAppSelector(state => state.generalReducer)
+    console.log("ye Color Option hai apna",colorOption);
 
   // zod Implementation
   const form = useForm<z.infer<typeof signUpSchema>>({

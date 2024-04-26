@@ -2,12 +2,13 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import {z} from "zod";
 
-export async function GET(request : Request){
+export async function POST(request : Request){
     await dbConnect()
 
     try {
         const {username , code} = await request.json()
         const decodedUsername = decodeURIComponent(username)
+        console.log("apan idhar verify code mein hai",username , code);
 
         const user = await UserModel.findOne({username : decodedUsername})
 

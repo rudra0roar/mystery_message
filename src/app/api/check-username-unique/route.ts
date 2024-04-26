@@ -34,6 +34,7 @@ export async function GET(request : Request){
         console.log("YE waali username ki value hai na sir",username);
 
         const existingVerifiedUser = await UserModel.findOne({username , isVerified : true})
+        console.log("ye apna existing Verified User hai",existingVerifiedUser);
 
         if(existingVerifiedUser){
             return Response.json({

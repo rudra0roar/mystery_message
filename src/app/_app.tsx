@@ -1,0 +1,200 @@
+// // _app.tsx
+
+// import { useEffect } from 'react';
+// import '../styles/globals.css'; // Import your global CSS file
+// import { useAppSelector } from '@/redux/hooks';
+// import { AppProps } from 'next/app';
+
+// function MyApp({ Component, pageProps }: AppProps) {
+//     const {colorOptions} = useAppSelector(state => state.generalReducer)
+//     console.log("ye Color Option hai apna",colorOptions);
+//     switch (colorOptions) {
+//         case "zinc":
+//             document.documentElement.style.setProperty("--background" , "0 0% 100%")
+//             document.documentElement.style.setProperty("--foreground" , "222.2 84% 4.9%")
+//             document.documentElement.style.setProperty("--card" , "0 0% 100%")
+//             document.documentElement.style.setProperty("--card-foreground" , "222.2 84% 4.9%")
+//             document.documentElement.style.setProperty("--popover" , "0 0% 100%")
+//             document.documentElement.style.setProperty("--popover-foreground" , "222.2 84% 4.9%")
+//             document.documentElement.style.setProperty("--primary" , "222.2 47.4% 11.2%")
+//             document.documentElement.style.setProperty("--primary-foreground" , "210 40% 98%")
+//             document.documentElement.style.setProperty("--secondary" , "210 40% 96.1%")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "222.2 47.4% 11.2%")
+//             document.documentElement.style.setProperty("--muted" , "210 40% 96.1%")
+//             document.documentElement.style.setProperty("--muted-foreground" , "215.4 16.3% 46.9%")
+//             document.documentElement.style.setProperty("--accent" , "210 40% 96.1%")
+//             document.documentElement.style.setProperty("--accent-foreground" , "222.2 47.4% 11.2%")
+//             document.documentElement.style.setProperty("--destructive" , "0 84.2% 60.2%")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "210 40% 98%")
+//             document.documentElement.style.setProperty("--border" , "214.3 31.8% 91.4%")
+//             document.documentElement.style.setProperty("--input" , "214.3 31.8% 91.4%")
+//             document.documentElement.style.setProperty("--ring" , "222.2 84% 4.9%")
+//             document.documentElement.style.setProperty("--radius" , "0.5rem")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+//             break;
+//         case "":
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
+
+//     }
+//     console.log(<Component {...pageProps} />);
+
+//     return <Component {...pageProps} />;
+// }
+
+// export default MyApp;
+
+
+
+
+
+
+
+
+//             document.documentElement.style.setProperty("--background" , "")
+//             document.documentElement.style.setProperty("--foreground" , "")
+//             document.documentElement.style.setProperty("--card" , "")
+//             document.documentElement.style.setProperty("--card-foreground" , "")
+//             document.documentElement.style.setProperty("--popover" , "")
+//             document.documentElement.style.setProperty("--popover-foreground" , "")
+//             document.documentElement.style.setProperty("--primary" , "")
+//             document.documentElement.style.setProperty("--primary-foreground" , "")
+//             document.documentElement.style.setProperty("--secondary" , "")
+//             document.documentElement.style.setProperty("--secondary-foreground" , "")
+//             document.documentElement.style.setProperty("--muted" , "")
+//             document.documentElement.style.setProperty("--muted-foreground" , "")
+//             document.documentElement.style.setProperty("--accent" , "")
+//             document.documentElement.style.setProperty("--accent-foreground" , "")
+//             document.documentElement.style.setProperty("--destructive" , "")
+//             document.documentElement.style.setProperty("--destructive-foreground" , "")
+//             document.documentElement.style.setProperty("--border" , "")
+//             document.documentElement.style.setProperty("--input" , "")
+//             document.documentElement.style.setProperty("--ring" , "")
+//             document.documentElement.style.setProperty("--radius" , "")
