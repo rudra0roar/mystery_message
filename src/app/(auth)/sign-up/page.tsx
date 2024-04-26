@@ -33,9 +33,6 @@ export default function page() {
   const debounced = useDebounceCallback(setUsername, 300)
   const { toast } = useToast()
   const router = useRouter()
-  console.log("Ye apna Username hai", username , usernameMessage);
-  const colorOption = useAppSelector(state => state.generalReducer)
-    console.log("ye Color Option hai apna",colorOption);
 
   // zod Implementation
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -54,7 +51,7 @@ export default function page() {
         setUsernameMessage('')
         try {
           const response = await axios.get(`/api/check-username-unique?username=${username}`)
-          console.log("Ye apna Response" , response);
+          console.log("Ye apna Response", response);
           setUsernameMessage(response.data.message)
         } catch (error) {
           const axiosError = error as AxiosError<ApiResponse>;
@@ -120,17 +117,16 @@ export default function page() {
                         debounced(e.target.value)
                       }} />
                   </FormControl>
-                  {isCheckingUsername && <Loader2 className='animate-spin'/>}
+                  {isCheckingUsername && <Loader2 className='animate-spin' />}
                   {!isCheckingUsername && usernameMessage &&
-                  <p
-                  className={`text-sm ${
-                    usernameMessage === 'username is available'
-                      ? 'text-green-500'
-                      : 'text-red-500'
-                  }`}
-                >
-                  {usernameMessage}
-                </p>
+                    <p
+                      className={`text-sm ${usernameMessage === 'username is available'
+                        ? 'text-green-500'
+                        : 'text-red-500'
+                        }`}
+                    >
+                      {usernameMessage}
+                    </p>
                   }
                   <FormMessage />
                 </FormItem>
@@ -162,20 +158,20 @@ export default function page() {
                 </FormItem>
               )}
             />
-            <Button type='submit' disabled = {isSubmitting}>
-              {isSubmitting ? 
-              <>
-              <Loader2 className='mr-2 h-4 w-4 animate-spin'/>
-              </> : ('Signup')}
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ?
+                <>
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                </> : ('Signup')}
             </Button>
           </form>
         </Form>
         <div className='text-center mt-4'>
           <p>
-             Already a Member?{' '}
-             <Link href="/sign-in" className='text-blue-600 hover:text-blue-800'>
-                Sign In
-             </Link>
+            Already a Member?{' '}
+            <Link href="/sign-in" className='text-blue-600 hover:text-blue-800'>
+              Sign In
+            </Link>
           </p>
         </div>
       </div>

@@ -27,10 +27,11 @@ export default function page() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { toast } = useToast()
     const router = useRouter()
+    console.log("fir se false", isSubmitting);
 
     // zod Implementation
     const form = useForm<z.infer<typeof signInSchema>>({
-        resolver: zodResolver(signUpSchema),
+        resolver: zodResolver(signInSchema),
         defaultValues: {
             identifier: "",
             password: ""
@@ -39,22 +40,25 @@ export default function page() {
 
 
     const onSubmit = async (data: z.infer<typeof signInSchema>) => {
-        const response = await signIn('credentials' , {
-            redirect : false,
-            identifier : data.identifier,
-            password : data.password
+        setIsSubmitting(true)
+        console.log("submit ho rha hai na", isSubmitting);
+        const response = await signIn('credentials', {
+            redirect: false,
+            identifier: data.identifier,
+            password: data.password
         })
-        if(response?.error){
+        if (response?.error) {
             toast({
-                title : "Login Failed",
-                description : "Invalid Username or Password",
-                variant : "destructive"
+                title: "Login Failed",
+                description: "Invalid Username or Password",
+                variant: "destructive"
             })
         }
 
-        if(response?.url){
+        if (response?.url) {
             router.replace('/dashboard')
         }
+        setIsSubmitting(false)
     }
 
 
@@ -71,7 +75,7 @@ export default function page() {
                 </div>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-                        
+
                         <FormField
                             control={form.control}
                             name="identifier"
