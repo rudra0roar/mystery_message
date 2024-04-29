@@ -33,7 +33,7 @@ export default function page() {
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
         defaultValues: {
-            identifier: "",
+            email: "",
             password: ""
         }
     })
@@ -44,7 +44,7 @@ export default function page() {
         console.log("submit ho rha hai na", isSubmitting);
         const response = await signIn('credentials', {
             redirect: false,
-            identifier: data.identifier,
+            identifier: data.email,
             password: data.password
         })
         if (response?.error) {
@@ -78,7 +78,7 @@ export default function page() {
 
                         <FormField
                             control={form.control}
-                            name="identifier"
+                            name="email"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Email/Username</FormLabel>

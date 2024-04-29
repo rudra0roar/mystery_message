@@ -17,7 +17,7 @@ export const authOptions : NextAuthOptions = {
             async authorize(credentials : any) : Promise<any>{
                 await dbConnect();
                 try {
-                    console.log("IDhar aaya na");
+                    console.log("IDhar aaya na" , credentials.identifier);
                     const user = await UserModel.findOne({
                         $or : [
                             {email : credentials.identifier},
